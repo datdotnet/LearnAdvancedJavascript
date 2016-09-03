@@ -26,10 +26,34 @@ Cat.prototype.purr = function(n){ //purr ở đây tiếng Anh nghĩa là tiến
     s += '-';
   }
     s += 'r';
-  }
+  } // đây là cách nối chuỗi rất hay, nếu dùng s+='r'+'-'; thì kết quả sau cùng phải cắt kí tự cuối --> mệt
   return s;
 }
 
 Cat.prototype.getName = function ( ) {
-  return this.name +  ' says: ' +  this.says( ); //hàm says được kế thừa thừ Mamal
+  return this.name +  ' says: ' +  this.says(); //hàm says được kế thừa thừ Mamal
 };
+
+//Dùng cách như trên thì cũng được, nhưng có vẻ gì đó khó hiểu, xa vời --> viết một hàm thực hiện việc kế thừa
+Function.method('inherits', function(Parent){
+  this.prototype = new Parent();
+  return this;
+});
+
+//Vì hàm inherits trả về this nên ta có thể dùng hàm này kiểu cascade như sau:
+var Dog = function(name){
+  this.name = name;
+  this.saying = "Gâu gâu..";
+}.inherits(Mamal)
+ .method('purr', function(){
+     var i, s = '';
+     for (i = 0; i < n; i += 1) {
+     if (s) {
+       s += '-';
+     }
+       s += 'ẳng';
+     }
+     return s;
+ }).method('getName', function(){
+   return this.name + ' says: ' + this.says();
+ })
